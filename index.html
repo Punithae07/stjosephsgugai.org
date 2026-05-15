@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-3e6Z4DgRqaY3wjQfqCZVSFzrB5pRzGQlUu7ZyLgppxR7Jp8S+QCq5KdAvUQKxA2a4N2k1z0Qts1K4Lmxed8fNQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#ff7d6b",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#241a00",
+                        "inverse-surface": "#333120",
+                        "surface-container-highest": "#e8e3ca",
+                        "surface-dim": "#dfdbc1",
+                        "secondary-container": "#fdd661",
+                        "surface-cream": "#F7F2D8",
+                        "outline-variant": "#e1bfb9",
+                        "background": "#fffae0",
+                        "surface-variant": "#e8e3ca",
+                        "on-primary-fixed": "#410000",
+                        "secondary-fixed-dim": "#e8c350",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#ffb4a8",
+                        "on-surface-variant": "#59413d",
+                        "inverse-on-surface": "#f6f1d7",
+                        "surface-tint": "#b02d1f",
+                        "primary-container": "#7b0000",
+                        "surface-bright": "#fffae0",
+                        "surface-container-low": "#f9f4da",
+                        "on-surface": "#1d1c0c",
+                        "accent-burgundy": "#5A0000",
+                        "surface": "#fffae0",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f3eed5",
+                        "on-secondary-fixed-variant": "#574500",
+                        "tertiary": "#520000",
+                        "surface-container-high": "#eee9cf",
+                        "secondary": "#735c00",
+                        "on-primary-container": "#ff7d6a",
+                        "tertiary-fixed": "#ffdad4",
+                        "primary-fixed": "#ffdad4",
+                        "on-secondary-container": "#745c00",
+                        "on-tertiary-fixed": "#410000",
+                        "on-background": "#1d1c0c",
+                        "outline": "#8d706c",
+                        "on-tertiary-fixed-variant": "#862217",
+                        "inverse-primary": "#ffb4a8",
+                        "tertiary-container": "#74140c",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb4a8",
+                        "secondary-fixed": "#ffe088",
+                        "text-rich-black": "#1A1A1A",
+                        "primary": "#520000",
+                        "on-primary-fixed-variant": "#8e120a",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "container-max-width": "1280px",
+                        "margin-desktop": "64px",
+                        "base": "8px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "display-lg-mobile": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .desktop-submenu {
+            min-width: 220px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .text-shadow-sm {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .abstract-pattern {
+            background-image: radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.1) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+    <header class="w-full">
+        <!-- Top Bar -->
+        <div
+            class="bg-[#7B0000] text-white py-2 px-margin-mobile md:px-margin-desktop flex justify-between items-center h-10">
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-2 group cursor-pointer">
+                    <i class="fa-solid fa-phone text-[14px]"></i>
+                    <span class="font-label-md text-[16px]">0427-2465336</span>
+                </div>
+                <div class="flex items-center gap-2 group cursor-pointer">
+                    <i class="fa-solid fa-envelope text-[14px]"></i>
+                    <span class="font-label-md text-[16px]">stjosephss@gmail.com</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-3 mr-4">
+                    <a class="hover:text-secondary-fixed transition-colors" href="#"><i
+                            class="fa-brands fa-facebook-f text-[14px]"></i></a>
+                    <a class="hover:text-secondary-fixed transition-colors" href="#"><i
+                            class="fa-brands fa-instagram text-[14px]"></i></a>
+                    <a class="hover:text-secondary-fixed transition-colors" href="#"><i
+                            class="fa-brands fa-youtube text-[14px]"></i></a>
+                    <a class="hover:text-secondary-fixed transition-colors" href="#"><i
+                            class="fa-brands fa-twitter text-[14px]"></i></a>
+                </div>
+                <button
+                    class="bg-[#E8C350] text-[#410000] px-4 py-1.5 rounded-sm font-bold text-[11px] uppercase tracking-wider hover:bg-secondary-fixed transition-colors">Online
+                    Payment</button>
+            </div>
+        </div>
+        <!-- Main Branding Bar -->
+        <div class="relative overflow-hidden">
+            <div class="absolute inset-0">
+                <img alt="Header background" class="w-full h-full object-cover opacity-70" src="assets/bg-banner.jpg" />
+                <div class="absolute inset-0 bg-[#000000]/70"></div>
+            </div>
+            <div class="relative max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop py-8 flex flex-col lg:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-4">
+                    <img alt="School Logo" class="w-20 h-20 border-white/20 object-cover shadow-lg"
+                        src="assets/logo-left.png" />
+                </div>
+                <div class="text-center flex-1">
+                    <h1 class="font-display-lg text-[2rem] md:text-[2rem] leading-tight font-extrabold uppercase tracking-[0.06em] text-white text-shadow-sm">St. Joseph's Matric Hr. Sec School</h1>
+                    <p class="mt-3 text-[#6DD934] font-bold uppercase tracking-[0.3em] text-sm md:text-base">Gugai, Salem</p>
+                </div>
+                <div class="flex items-center justify-center">
+                    <img alt="Religious Portrait" class="w-20 h-20 border-white/20 object-cover shadow-lg"
+                        src="assets/logo-right.png " />
+                </div>
+            </div>
+        </div>
+        <!-- Navigation Bar -->
+        <nav class="bg-[#FDD661] shadow-md sticky top-0 z-50">
+            <div class="max-w-[1280px] mx-auto px-margin-mobile py-3 md:px-0 relative flex items-center justify-center">
+                <button id="mobile-menu-toggle"
+                    class="md:hidden absolute left-4 text-[#7B0000] bg-white p-3 rounded-md shadow-sm border border-[#7B0000]/15">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="hidden md:flex items-center gap-8 overflow-x-auto no-scrollbar justify-center">
+                    <a class="font-label-md text-[13px] text-[#7B0000] font-bold border-b-2 border-[#7B0000] uppercase"
+                        href="#">Home</a>
+                    <div class="relative group">
+                        <button type="button"
+                            class="font-label-md text-[13px] text-[#410000] hover:text-[#7B0000] flex items-center gap-1 transition-colors uppercase">
+                            About Us <i class="fa-solid fa-chevron-down text-[14px]"></i>
+                        </button>
+                        <div
+                            class="desktop-submenu absolute left-0 top-full mt-2 hidden group-hover:block bg-white border border-outline-variant/30 shadow-xl rounded-lg py-2">
+                            <a class="block px-4 py-2 text-sm text-on-surface hover:bg-[#FDD661]/80"
+                                href="#">History</a>
+                            <a class="block px-4 py-2 text-sm text-on-surface hover:bg-[#FDD661]/80" href="#">Vision &
+                                Mission</a>
+                            <a class="block px-4 py-2 text-sm text-on-surface hover:bg-[#FDD661]/80" href="#">Values</a>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <button type="button"
+                            class="font-label-md text-[13px] text-[#410000] hover:text-[#7B0000] flex items-center gap-1 transition-colors uppercase">
+                            Academics <i class="fa-solid fa-chevron-down text-[14px]"></i>
+                        </button>
+                    </div>
+                    <div class="relative group">
+                        <button type="button"
+                            class="font-label-md text-[13px] text-[#410000] hover:text-[#7B0000] flex items-center gap-1 transition-colors uppercase">
+                            Management <i class="fa-solid fa-chevron-down text-[14px]"></i>
+                        </button>
+                    </div>
+                    <a class="font-label-md text-[13px] text-[#410000] hover:text-[#7B0000] transition-colors uppercase"
+                        href="#">Faculty</a>
+                    <div class="relative group">
+                        <button type="button"
+                            class="font-label-md text-[13px] text-[#410000] hover:text-[#7B0000] flex items-center gap-1 transition-colors uppercase">
+                            Students <i class="fa-solid fa-chevron-down text-[14px]"></i>
+                        </button>
+                    </div>
+                    <a class="font-label-md text-[13px] text-[#410000] hover:text-[#7B0000] transition-colors uppercase"
+                        href="#">Contact Us</a>
+                    <a class="font-label-md text-[13px] text-[#410000] hover:text-[#7B0000] transition-colors uppercase"
+                        href="#">Alumni (Josa)</a>
+                    <div class="relative group">
+                        <button type="button"
+                            class="font-label-md text-[13px] text-[#410000] hover:text-[#7B0000] flex items-center gap-1 transition-colors uppercase">
+                            Gallery <i class="fa-solid fa-chevron-down text-[14px]"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-outline-variant/30">
+                <div class="flex flex-col gap-1 px-4 py-4">
+                    <a class="font-label-md text-[14px] text-[#7B0000] font-bold uppercase py-2" href="#">Home</a>
+                    <div class="border-t border-outline-variant/20 pt-3">
+                        <button data-mobile-target="about-submenu"
+                            class="w-full flex items-center justify-between gap-2 text-left font-label-md text-[14px] text-on-surface uppercase py-2">
+                            <span>About Us</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div id="about-submenu" class="hidden flex flex-col gap-1 pl-4 mt-2">
+                            <a class="py-2 text-sm text-on-surface hover:text-secondary-fixed" href="#">History</a>
+                            <a class="py-2 text-sm text-on-surface hover:text-secondary-fixed" href="#">Vision &
+                                Mission</a>
+                            <a class="py-2 text-sm text-on-surface hover:text-secondary-fixed" href="#">Values</a>
+                        </div>
+                    </div>
+                    <a class="font-label-md text-[14px] text-on-surface uppercase py-2" href="#">Academics</a>
+                    <a class="font-label-md text-[14px] text-on-surface uppercase py-2" href="#">Management</a>
+                    <a class="font-label-md text-[14px] text-on-surface uppercase py-2" href="#">Faculty</a>
+                    <a class="font-label-md text-[14px] text-on-surface uppercase py-2" href="#">Students</a>
+                    <a class="font-label-md text-[14px] text-on-surface uppercase py-2" href="#">Contact Us</a>
+                    <a class="font-label-md text-[14px] text-on-surface uppercase py-2" href="#">Alumni (Josa)</a>
+                    <a class="font-label-md text-[14px] text-on-surface uppercase py-2" href="#">Gallery</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <!-- Hero Section -->
+        <section class="relative w-full h-[870px] flex items-center overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-tertiary via-tertiary/80 to-transparent z-10"></div>
+            <img alt="School Campus" class="absolute inset-0 w-full h-full object-cover" src="assets/slider-01.jpg" />
+            <div class="relative z-20 px-margin-desktop max-w-[1280px] mx-auto w-full">
+                <div class="max-w-2xl text-on-primary">
+                    <span
+                        class="inline-block px-4 py-1 bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md rounded mb-6">ADMISSION
+                        OPEN 2024-25</span>
+                    <h1 class="font-display-lg text-display-lg mb-6 leading-tight">Empowering Students Through Knowledge
+                        &amp; Values</h1>
+                    <p class="font-body-lg text-body-lg opacity-90 mb-10 max-w-lg">A tradition of excellence in
+                        education and character building. We nurture young minds to become future leaders with strong
+                        moral foundations.</p>
+                    <div class="flex gap-4">
+                        <button
+                            class="px-8 py-4 bg-secondary-container text-on-secondary-container font-headline-md text-headline-md rounded-lg shadow-xl hover:scale-105 transition-transform">Explore
+                            Campus</button>
+                        <button
+                            class="px-8 py-4 border-2 border-on-primary text-on-primary font-headline-md text-headline-md rounded-lg hover:bg-on-primary hover:text-primary transition-all">Learn
+                            More</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Feature Highlights -->
+        <section class="bg-primary py-24">
+            <div class="max-w-[1280px] mx-auto px-margin-desktop flex flex-col lg:flex-row gap-16 items-center">
+                <div class="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass-card p-8 rounded-xl group hover:bg-white/20 transition-all cursor-pointer">
+                        <span class="material-symbols-outlined text-secondary-fixed text-4xl mb-4"
+                            data-icon="groups">groups</span>
+                        <h3 class="font-headline-md text-headline-md text-on-primary mb-2">Community</h3>
+                        <p class="font-body-md text-body-md text-on-primary/80">Fostering a sense of belonging and
+                            mutual respect among students.</p>
+                    </div>
+                    <div class="glass-card p-8 rounded-xl group hover:bg-white/20 transition-all cursor-pointer">
+                        <span class="material-symbols-outlined text-secondary-fixed text-4xl mb-4"
+                            data-icon="school">school</span>
+                        <h3 class="font-headline-md text-headline-md text-on-primary mb-2">Academics</h3>
+                        <p class="font-body-md text-body-md text-on-primary/80">Rigorous curriculum designed for
+                            holistic intellectual growth.</p>
+                    </div>
+                    <div class="glass-card p-8 rounded-xl group hover:bg-white/20 transition-all cursor-pointer">
+                        <span class="material-symbols-outlined text-secondary-fixed text-4xl mb-4"
+                            data-icon="assignment_ind">assignment_ind</span>
+                        <h3 class="font-headline-md text-headline-md text-on-primary mb-2">Admission</h3>
+                        <p class="font-body-md text-body-md text-on-primary/80">Transparent process for joining our
+                            esteemed institution.</p>
+                    </div>
+                    <div class="glass-card p-8 rounded-xl group hover:bg-white/20 transition-all cursor-pointer">
+                        <span class="material-symbols-outlined text-secondary-fixed text-4xl mb-4"
+                            data-icon="sports_soccer">sports_soccer</span>
+                        <h3 class="font-headline-md text-headline-md text-on-primary mb-2">Activities</h3>
+                        <p class="font-body-md text-body-md text-on-primary/80">Wide range of co-curricular activities
+                            to spark creativity.</p>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <h2 class="font-display-lg text-display-lg text-secondary-fixed mb-6 leading-tight">Discover Our Top
+                        School Child Benefits</h2>
+                    <p class="font-body-lg text-body-lg text-on-primary opacity-80 mb-8">We provide a nurturing
+                        environment where every child's potential is recognized and cultivated through personalized
+                        attention and world-class facilities.</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-4 text-on-primary">
+                            <span class="material-symbols-outlined text-secondary-fixed"
+                                data-icon="check_circle">check_circle</span>
+                            <span class="font-body-md text-body-md">Smart Classrooms &amp; Modern Labs</span>
+                        </li>
+                        <li class="flex items-center gap-4 text-on-primary">
+                            <span class="material-symbols-outlined text-secondary-fixed"
+                                data-icon="check_circle">check_circle</span>
+                            <span class="font-body-md text-body-md">Expert Faculty with Decades of Experience</span>
+                        </li>
+                        <li class="flex items-center gap-4 text-on-primary">
+                            <span class="material-symbols-outlined text-secondary-fixed"
+                                data-icon="check_circle">check_circle</span>
+                            <span class="font-body-md text-body-md">Value-Based Catholic Education System</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- About Section -->
+        <section class="py-24 bg-surface">
+            <div class="max-w-[1280px] mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div class="relative">
+                    <div class="absolute -top-6 -left-6 w-32 h-32 bg-secondary-fixed rounded-xl -z-10"></div>
+                    <img alt="Academic Excellence" class="w-full h-[500px] object-cover rounded-2xl shadow-2xl"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtreZS4LJJtov3ZYSZ3t6JoFLMreZrcuV28o2-EwjkekSsfbUwrPp1uhREJ-xu0e2-yhYHf2U7ow3cIeGb8j1NsWIsKgvWMhLtLnVVsbfDF29d3BbkMtC-OQSFiX80_pY0aBzIgHLsyGCY7vTjeDz7TFViIMpZPUG3diTJO1-R571NRnl-XEnq3HxFN0vtR_2mIi1ekXNTVC254tcXycIQSsJQ6GQ1cOUZBJa6lhJT5qcDhYn0w29rqj8Cmc9FDtQzkax0Fydwj8u9" />
+                    <div class="absolute -bottom-10 -right-10 bg-on-primary p-8 rounded-2xl shadow-xl max-w-xs">
+                        <h4 class="font-headline-md text-headline-md text-primary mb-2">40+ Years</h4>
+                        <p class="font-body-md text-body-md text-on-surface-variant">Of shaping futures and building
+                            character in Salem.</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="font-body-lg text-body-lg text-on-surface mb-8 leading-relaxed">Anne Marie Javouhey, the
+                        Foundress of the Congregation of the Sisters of St. Joseph's of Cluny, answered the divine call
+                        earnestly and dedicated her life for the sake of uplifting the downtrodden. Education proved to
+                        be the ideal instrument for the purpose and so, the missionary sisters, founded schools and
+                        educational institutions in different parts of the world.</p>
+                    <button
+                        class="px-6 py-2 bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md rounded-full flex items-center gap-2 hover:bg-secondary-container transition-all">Know
+                        More <span class="material-symbols-outlined text-[18px]">arrow_circle_right</span></button>
+                </div>
+            </div>
+        </section>
+        <!-- St. Joseph Section -->
+        <section class="py-24 bg-white">
+            <div class="max-w-[1280px] mx-auto px-margin-desktop flex flex-col lg:flex-row-reverse gap-20 items-center">
+                <div class="w-full lg:w-1/2">
+                    <img alt="St. Joseph" class="w-full h-auto object-contain"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbOVgIeL_aUgDCONBJXXQgDWlezl6jKyvAzm8d0ZswiOUU97OspV6AU_xKWu1ImWcHg2uWXdcSBegXjQ2PH3iiwtpVKOgcGMKfCvEZTr75gG49rHPUQSgV5ofYjknhp7MdDUWGth2GENWSL-Jk58XmVvxhsaXq24SLRYa8m0J59YcPL4AAC2C-_PEzfKCpdFlss1OwSWbUsATFhQQPfXWWMkeuhHXCRqrzbFwaktpA5jIJ8h4a3h77wW36ZnnPRCvu8Wpo-VIVJy_G" />
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <p class="font-body-lg text-body-lg text-on-surface mb-10 leading-relaxed">St. Joseph (flourished
+                        1st century bc, Nazareth, Galilee, region of Palestine; principal feast day March 19, Feast of
+                        St. Joseph the Worker May 1) was, in the New Testament, Jesus' earthly father and the Virgin
+                        Mary's husband. St. Joseph is the patron of the universal church in Roman Catholicism, and his
+                        life is recorded in the Gospels, particularly Matthew and Luke.</p>
+                    <button
+                        class="px-6 py-2 bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md rounded-full flex items-center gap-2 hover:bg-secondary-container transition-all">Know
+                        More <span class="material-symbols-outlined text-[18px]">arrow_circle_right</span></button>
+                </div>
+            </div>
+        </section>
+        <!-- Why We Are The Best -->
+        <section class="py-16 bg-surface-bright text-center border-y border-outline-variant/30">
+            <div class="max-w-[1280px] mx-auto px-margin-desktop">
+                <h2 class="font-display-lg text-display-lg tracking-[0.2em] text-on-surface uppercase opacity-80">WE ARE
+                    THE BEST</h2>
+            </div>
+        </section>
+        <!-- Management Speak -->
+        <section class="py-24 bg-white">
+            <div class="max-w-[1280px] mx-auto px-margin-desktop">
+                <div
+                    class="grid grid-cols-1 lg:grid-cols-12 gap-0 border border-outline-variant/30 rounded-lg overflow-hidden shadow-sm">
+                    <div class="lg:col-span-4 bg-surface-container relative">
+                        <img alt="Principal" class="w-full h-full object-cover grayscale-[20%]"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2dNKgsXdIRaRd5cscETU4uRqs-WXqkQKDbgB4kHsGApdGVR9UYwjutxgbMr1tUxJeEA3sbBTl8Q3FPYhORe2jtKsBFtu9iy5PajkwddqTVZX4UdNZ0UV7Sc0fc42lArpgklwcv6pEmB5xrSID3n4SwITZ8wysjlI_k018XEpZEbNQ4_JMO1XBSnEGKTZraULmz6zCf8leNuGUCiDYxuF0SiRcSSyfja4SpZBDqXxdHjLK14quOFFAf21fU79hLETvH_NTIq9Lpz5Y" />
+                        <div
+                            class="absolute bottom-4 left-4 right-4 bg-primary/90 text-on-primary py-2 px-4 rounded text-center">
+                            <p class="font-label-md text-[14px]">Sr. Jancy K.K. M.A., M.Ed., M.Phil., - <span
+                                    class="text-secondary-fixed">PRINCIPAL</span></p>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-8 p-12 bg-white flex flex-col justify-center">
+                        <h3
+                            class="font-display-lg text-headline-lg tracking-[0.1em] text-on-surface uppercase mb-8 border-b-2 border-outline-variant/20 pb-4 inline-block self-start">
+                            MANAGEMENT SPEAK</h3>
+                        <p class="font-body-lg text-body-lg text-on-surface-variant mb-6">Dear Friends,</p>
+                        <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-10">
+                            Each day of the year brings in; fresh ambiance new promises, latest inventions and above all
+                            great optimism to life. Education unfolds creativity and induces inspiration in the young.
+                            In St. Joseph's at Gugai with its legacy of a laudable past, we engage in building character
+                            and competence in our students. Knowing that every child is a unique gift of God, to be
+                            brought up with affection and understanding...
+                        </p>
+                        <button
+                            class="px-6 py-2 bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md rounded-full flex items-center gap-2 self-end hover:bg-secondary-container transition-all">Know
+                            More <span class="material-symbols-outlined text-[18px]">arrow_circle_right</span></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Carousel & Links Section -->
+        <section class="py-24 bg-surface-container-low">
+            <div class="max-w-[1280px] mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Carousel Area -->
+                <div class="lg:col-span-8 relative rounded-2xl overflow-hidden shadow-2xl">
+                    <img alt="School Event" class="w-full h-[600px] object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHGUoUiR5HIBJRLGVOXFDMgI-1v5vKXuE8jB2zZYcvti-o-3qJ11eH68tEf4BV-V6Ey9myIcxLo8UVjquYnRgkyCblfnfpg4LZUgKyiH1o-XIiScQoS3fJHgc0dt6B5lR23MGyeV3Pj0M_z1HS2MXsQJUuT0KFZ5Wym6P40fH-OaSKKBNj5t1f3hljtXu4zWqNDxmIJONQQKCiIDzC9ruHsr65B11ogB0mXHadFipa5v1M_ie3po8y5Czz9HgqYaotoq59QJgXWyGB" />
+                    <div class="absolute inset-y-0 left-4 flex items-center">
+                        <button
+                            class="w-12 h-12 bg-black/30 rounded-full flex items-center justify-center text-white hover:bg-black/50"><span
+                                class="material-symbols-outlined">chevron_left</span></button>
+                    </div>
+                    <div class="absolute inset-y-0 right-4 flex items-center">
+                        <button
+                            class="w-12 h-12 bg-black/30 rounded-full flex items-center justify-center text-white hover:bg-black/50"><span
+                                class="material-symbols-outlined">chevron_right</span></button>
+                    </div>
+                </div>
+                <!-- Side Links -->
+                <div class="lg:col-span-4 flex flex-col gap-6 py-8">
+                    <a class="group flex items-center gap-3" href="#">
+                        <span class="font-headline-md text-headline-md text-primary group-hover:underline">Craft Expo
+                            '25</span>
+                        <img alt="New" class="h-4"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrXOFEqwJOHqOUteoBNBAnlSmboRUim3OxAS9al7GVQmtGDkMWHQguhqDtnlK6S63yOuifnvihj0L6N0_hAVknxtAzmSK7ti9bB1namOfZfQKAhka2zTvMdRqpimpvrTlWo2jz68SmAu4XBNUwD4i79fhb5T-qo6E7ZQgoKzbe0RrBG9g_xZsDnj27gce5d8yQsFFogPscjVvx_C6hYMmZnvlik-G79I3LIgqGwWPcMwv2WmtKa9GL50O7bZAi6OqZDcNORrIk-HQU" />
+                    </a>
+                    <a class="group flex items-center gap-3" href="#">
+                        <span class="font-headline-md text-headline-md text-primary group-hover:underline">Talent
+                            Hunt</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- YouTube & Spotlight Section -->
+        <section class="py-24 bg-secondary-fixed/20">
+            <div class="max-w-[1280px] mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                <!-- YouTube Component -->
+                <div class="bg-black/90 rounded-xl overflow-hidden text-white">
+                    <div class="p-6 flex items-center justify-between border-b border-white/10">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                                <span class="material-symbols-outlined text-white">smart_display</span>
+                            </div>
+                            <div>
+                                <h4 class="font-headline-md text-body-lg">St.Josephs Salem</h4>
+                                <div class="flex gap-4 text-[12px] opacity-60">
+                                    <span class="flex items-center gap-1"><span
+                                            class="material-symbols-outlined text-[14px]">videocam</span> 13</span>
+                                    <span class="flex items-center gap-1"><span
+                                            class="material-symbols-outlined text-[14px]">visibility</span> 94.1K</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 flex gap-4 text-[13px] border-b border-white/10">
+                        <button class="text-white border-b-2 border-white pb-1">Videos</button>
+                        <button class="text-white/60 pb-1">Playlists</button>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-3 gap-4 mb-6">
+                            <div class="space-y-2">
+                                <div class="aspect-video bg-white/10 rounded"></div>
+                                <p class="text-[10px] line-clamp-2">ST. JOSEPH'S MAT...</p>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="aspect-video bg-white/10 rounded"></div>
+                                <p class="text-[10px] line-clamp-2">St Joseph Matric Hr...</p>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="aspect-video bg-white/10 rounded"></div>
+                                <p class="text-[10px] line-clamp-2">KIDS FEST - 2024- 2...</p>
+                            </div>
+                        </div>
+                        <button
+                            class="w-full py-2 bg-white/10 hover:bg-white/20 text-[12px] rounded transition-colors uppercase tracking-widest font-bold">10
+                            more</button>
+                    </div>
+                </div>
+                <!-- Student Spotlight -->
+                <div class="flex flex-col items-center">
+                    <div class="p-2 bg-on-tertiary-fixed-variant shadow-2xl inline-block rotate-[-1deg]">
+                        <div class="bg-white p-1">
+                            <img alt="Star Student" class="w-72 h-72 object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJRhgGogndwI4xr5ixD6rfgEiBRDr3WkXZgZ1oU7tF1z5JC_aiAisK78ZwmgEO9Ksn5B2jmA8PG8CWVTmxBKsOaGaHS1A1oCYKlHAThyjdglowMkv2KF86ziR8OPCJ9j0azMfu-X70g_B1CSv5xhEknDF2TJFPjOvkTCl--qrHzZCOWNkeoBnRvo5c7rTvmgO-roNlNlkTCladN1wlm6AX0r_rJ53D5zI5sk3LtGi9ny8e90eWmTcuJ82BN_IkjfJilh7x-2e63shC" />
+                        </div>
+                    </div>
+                    <h4 class="mt-8 font-headline-md text-headline-md text-primary tracking-widest">MITHRANJANA P - V A
+                    </h4>
+                </div>
+            </div>
+        </section>
+        <!-- Thought of the Day -->
+        <section class="py-20 bg-primary text-center relative overflow-hidden">
+            <div class="absolute inset-0 abstract-pattern opacity-20"></div>
+            <!-- Decorative abstract lines (SVG overlay) -->
+            <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-10" viewbox="0 0 1440 320">
+                <path
+                    d="M0,160L40,181.3C80,203,160,245,240,245.3C320,245,400,203,480,186.7C560,171,640,181,720,176C800,171,880,149,960,154.7C1040,160,1120,192,1200,197.3C1280,203,1360,181,1400,170.7L1440,160L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"
+                    fill="none" stroke="white" stroke-width="0.5"></path>
+            </svg>
+            <div class="relative z-10 max-w-[1280px] mx-auto px-margin-desktop">
+                <h3 class="font-label-md text-label-md text-secondary-fixed tracking-[0.3em] uppercase mb-6">THOUGHT OF
+                    THE DAY</h3>
+                <h2 class="font-display-lg text-display-lg text-on-primary italic leading-tight">"Don’t Judge Your
+                    Future On Your Past"</h2>
+                <div class="mt-8 flex justify-center">
+                    <div class="w-16 h-1 bg-secondary-fixed"></div>
+                </div>
+            </div>
+        </section>
+        <!-- Photo Grid -->
+        <section class="py-24 bg-white">
+            <div class="max-w-[1280px] mx-auto px-margin-desktop space-y-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="aspect-[4/3] bg-surface-container-high rounded overflow-hidden shadow-md">
+                        <img alt="Gallery 1" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHGUoUiR5HIBJRLGVOXFDMgI-1v5vKXuE8jB2zZYcvti-o-3qJ11eH68tEf4BV-V6Ey9myIcxLo8UVjquYnRgkyCblfnfpg4LZUgKyiH1o-XIiScQoS3fJHgc0dt6B5lR23MGyeV3Pj0M_z1HS2MXsQJUuT0KFZ5Wym6P40fH-OaSKKBNj5t1f3hljtXu4zWqNDxmIJONQQKCiIDzC9ruHsr65B11ogB0mXHadFipa5v1M_ie3po8y5Czz9HgqYaotoq59QJgXWyGB" />
+                    </div>
+                    <div class="aspect-[4/3] bg-surface-container-high rounded overflow-hidden shadow-md">
+                        <img alt="Gallery 2" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXbW2FIvYTLuM5qYxWqNaSPxrA5lVDTzTMfB5hhCZZ3u_qUXX-kv3mJYkEJ5HG4GN5yJ1IHFw7xdR_vCNfxKaA--fsFPH28DVroTtriYg4wmTftl2uHR9k1VB9YRNcGqfgAnpPCiNjs3aEakzLPRHdF6TRbTLdGpZNfF_JmegA-ISP6U6SSxOvdjSl3FXGi0EzGlrHcu0k3RmNCHfR-KpCDuLQNgtoJZSyGdCxBXKn0sgHV3D7tHBsMGbZ3QpGpkET5zihyFndlMad" />
+                    </div>
+                    <div class="aspect-[4/3] bg-surface-container-high rounded overflow-hidden shadow-md">
+                        <img alt="Gallery 3" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHib7_t5vCJgy8nR0zyts7wX8o90AqL2IR90PgpxkTCpIxfh8MBXfcvx4aCbHGQ2Um-Dmcg89cMV7Y7uQN-StZ2Ex1KA15qgQg0zhUpnLepmF2iJbE6mHMUWO5VN1j6uGnQxs0fsUAVbT9YRflsu1c38eO1ZnY8-scFZXwoPHeg5j33JM4q_0n7fstqjx1nfrQd1P7SpRleQHNlTeX2XA9ujOZEkC_-yCNpJg4EVkT04pkUbREe0seMVLlRD8rKZ6m5E_paw8FuB8Q" />
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <button
+                        class="px-6 py-2 bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md rounded-full flex items-center gap-2 hover:bg-secondary-container transition-all">View
+                        More <span class="material-symbols-outlined text-[18px]">arrow_circle_right</span></button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="w-full py-20 px-margin-desktop bg-primary text-on-primary">
+        <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <!-- Logo & Map -->
+            <div class="md:col-span-1 space-y-6">
+                <div class="font-display-lg text-headline-md tracking-tighter uppercase leading-none">
+                    ST. JOSEPH'S <span class="block text-secondary-fixed text-[14px]">MATRICULATION HIGHER SECONDARY
+                        SCHOOL</span>
+                </div>
+                <p class="font-headline-md text-[14px] text-secondary-fixed uppercase tracking-widest">Campus Location
+                </p>
+                <div class="w-full aspect-video bg-white/10 rounded overflow-hidden border border-white/20">
+                    <img alt="Map" class="w-full h-full object-cover opacity-50 contrast-125"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYRTbqis5ton57_eTlzq3W0JE1cFElvQi0ASFKJRctdysru0Mo9gK9KCkRywc363rQBtVfDbog_rlTI2NN4TMxrfM0hXV57pjBejZ5VRiipnBikmuBu-2grf_wQGuWDXTAiEKLRF8yVESowRs0Q_Jip4s50xEo0QWRrnpzw0tV8DdjPVgQIm0ioRY2JwyQ_OR4x2uabTg6znmYpNk21CSnDpEGFBekLonztwWEkPuU9Dq9Wn6S-7Y9JgZNtkBa22hIXJHsMyvRn-ph" />
+                </div>
+            </div>
+            <!-- Quick Links -->
+            <div class="md:col-span-1">
+                <h4 class="font-headline-md text-headline-md mb-8 text-secondary-fixed">Quick Links</h4>
+                <ul class="space-y-4 font-body-md text-on-primary/70">
+                    <li><a class="hover:text-secondary-fixed transition-colors" href="#">Upcoming Events</a></li>
+                    <li><a class="hover:text-secondary-fixed transition-colors" href="#">Latest News</a></li>
+                    <li><a class="hover:text-secondary-fixed transition-colors" href="#">Manager's Message</a></li>
+                    <li><a class="hover:text-secondary-fixed transition-colors" href="#">Principal's Message</a></li>
+                    <li><a class="hover:text-secondary-fixed transition-colors" href="#">TC Issued</a></li>
+                </ul>
+            </div>
+            <!-- Address -->
+            <div class="md:col-span-1">
+                <h4 class="font-headline-md text-headline-md mb-8 text-secondary-fixed">Address</h4>
+                <div class="space-y-6 font-body-md text-on-primary/70">
+                    <p>St. Joseph's Matriculation Higher Secondary School, Pension Line, Gugai Salem – 636 006</p>
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-secondary-fixed">call</span>
+                        <span>0427-2465336</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-secondary-fixed">mail</span>
+                        <span>stjosephss@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Follow Us -->
+            <div class="md:col-span-1">
+                <h4 class="font-headline-md text-headline-md mb-8 text-secondary-fixed">Follow Us</h4>
+                <div class="flex gap-6">
+                    <a class="hover:text-secondary-fixed transition-transform hover:scale-110" href="#"><span
+                            class="material-symbols-outlined">facebook</span></a>
+                    <a class="hover:text-secondary-fixed transition-transform hover:scale-110" href="#"><span
+                            class="material-symbols-outlined">photo_camera</span></a>
+                    <a class="hover:text-secondary-fixed transition-transform hover:scale-110" href="#"><span
+                            class="material-symbols-outlined">smart_display</span></a>
+                    <a class="hover:text-secondary-fixed transition-transform hover:scale-110" href="#"><span
+                            class="material-symbols-outlined">link</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-20 pt-8 border-t border-white/10 text-center font-body-md text-[12px] text-on-primary/40">
+            Copyright © 2024 St. Joseph's Matriculation Higher Secondary School, Gugai, Salem. | Powered by Boscosoft
+        </div>
+    </footer>
+    <script>
+        const mobileToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileToggle && mobileMenu) {
+            mobileToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+        document.querySelectorAll('[data-mobile-target]').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-mobile-target');
+                const panel = document.getElementById(targetId);
+                if (panel) {
+                    panel.classList.toggle('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
