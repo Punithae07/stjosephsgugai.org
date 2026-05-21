@@ -111,6 +111,8 @@
 
         .desktop-submenu {
             min-width: 220px;
+            z-index: 60;
+            white-space: nowrap;
         }
 
         .glass-card {
@@ -154,7 +156,7 @@
 
         .marquee-container {
             overflow: hidden;
-            height: auto;
+            height: 260px;
             position: relative;
             padding: 12px 0;
         }
@@ -162,9 +164,9 @@
         .marquee-content {
             animation: marqueeUp 18s linear infinite;
             display: flex;
-            align-items: center;
-            gap: 24px;
-            white-space: nowrap;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 16px;
         }
 
         .marquee-content:hover {
@@ -173,12 +175,13 @@
 
         .marquee-item {
             flex-shrink: 0;
+            width: 100%;
             padding: 16px;
             border-radius: 8px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
-            display: inline-flex;
+            display: flex;
             align-items: center;
         }
 
@@ -187,18 +190,27 @@
             border-color: rgba(255, 255, 255, 0.2);
         }
 
+        @keyframes marqueeUp {
+            0% {
+                transform: translateY(100%);
+            }
+            100% {
+                transform: translateY(-100%);
+            }
+        }
+
         /* Birthday photo auto-scroll */
         @keyframes photoScroll {
             0% {
-                transform: translateY(0);
+                transform: translateX(0);
             }
             100% {
-                transform: translateY(-50%);
+                transform: translateX(-50%);
             }
         }
 
         .photo-scroll-container {
-            height: 600px;
+            height: 360px;
             overflow: hidden;
             position: relative;
             border-radius: 24px;
@@ -206,10 +218,11 @@
 
         .photo-scroll-content {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             gap: 20px;
-            animation: photoScroll 18s linear infinite;
+            animation: photoScroll 20s linear infinite;
             padding: 20px;
+            width: max-content;
         }
 
         .photo-scroll-content:hover {
@@ -221,6 +234,8 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            min-width: 260px;
+            width: 260px;
         }
 
         .photo-card img {
@@ -230,6 +245,34 @@
         .photo-card h4 {
             margin-bottom: 0.25rem;
         }
+
+        @media (max-width: 640px) {
+            .hero-section {
+                min-height: 620px;
+            }
+            .hero-heading {
+                font-size: 1.8rem;
+            }
+            .hero-copy {
+                font-size: 15px;
+            }
+            .marquee-container {
+                height: auto;
+            }
+            .marquee-item {
+                padding: 12px;
+            }
+            .photo-scroll-container {
+                height: 280px;
+            }
+            .photo-card {
+                min-width: 220px;
+                width: 220px;
+            }
+            .font-display-lg {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
 
@@ -237,19 +280,26 @@
     <header class="w-full">
         <!-- Top Bar -->
         <div
-            class="bg-[#7B0000] text-white py-2 px-margin-mobile md:px-margin-desktop flex justify-between items-center h-10">
-            <div class="flex items-center gap-6">
-                <div class="flex items-center gap-2 group cursor-pointer">
-                    <i class="bi bi-telephone text-[14px]"></i>
-                    <span class="font-label-md text-[16px]">0427-2465336</span>
-                </div>
-                <div class="flex items-center gap-2 group cursor-pointer">
-                    <i class="bi bi-envelope text-[14px]"></i>
-                    <span class="font-label-md text-[16px]">stjosephss@gmail.com</span>
+            class="bg-[#7B0000] text-white py-2 px-margin-mobile md:px-margin-desktop flex justify-between items-center min-h-[48px]">
+            <div class="flex items-center gap-4">
+                <button id="mobile-contact-toggle"
+                    class="md:hidden inline-flex items-center gap-2 text-[13px] font-medium px-2 py-2 bg-white/10 rounded-lg border border-white/20">
+                    <i class="bi bi-info-circle"></i>
+                    Contact
+                </button>
+                <div class="hidden md:flex items-center gap-6">
+                    <div class="flex items-center gap-2 group cursor-pointer">
+                        <i class="bi bi-telephone text-[14px]"></i>
+                        <span class="font-label-md text-[16px]">0427-2465336</span>
+                    </div>
+                    <div class="flex items-center gap-2 group cursor-pointer">
+                        <i class="bi bi-envelope text-[14px]"></i>
+                        <span class="font-label-md text-[16px]">stjosephss@gmail.com</span>
+                    </div>
                 </div>
             </div>
             <div class="flex items-center gap-4">
-                <div class="flex items-center gap-3 mr-4">
+                <div class="flex items-center gap-3 mr-4 hidden md:flex">
                     <a class="hover:text-secondary-fixed transition-colors" href="#"><i
                             class="bi bi-facebook text-[14px]"></i></a>
                     <a class="hover:text-secondary-fixed transition-colors" href="#"><i
@@ -262,6 +312,24 @@
                 <button
                     class="bg-[#E8C350] text-[#410000] px-4 py-1.5 rounded-sm font-bold text-[11px] uppercase tracking-wider hover:bg-secondary-fixed transition-colors">Online
                     Payment</button>
+            </div>
+        </div>
+        <div id="mobile-contact-panel" class="hidden md:hidden bg-[#7B0000] text-white px-margin-mobile md:px-margin-desktop py-4 border-t border-white/10">
+            <div class="flex flex-col gap-3">
+                <div class="flex items-center gap-2">
+                    <i class="bi bi-telephone text-[14px]"></i>
+                    <span class="font-label-md text-[16px]">0427-2465336</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="bi bi-envelope text-[14px]"></i>
+                    <span class="font-label-md text-[16px]">stjosephss@gmail.com</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a class="hover:text-secondary-fixed transition-colors" href="#"><i class="bi bi-facebook text-[14px]"></i></a>
+                    <a class="hover:text-secondary-fixed transition-colors" href="#"><i class="bi bi-instagram text-[14px]"></i></a>
+                    <a class="hover:text-secondary-fixed transition-colors" href="#"><i class="bi bi-youtube text-[14px]"></i></a>
+                    <a class="hover:text-secondary-fixed transition-colors" href="#"><i class="bi bi-twitter text-[14px]"></i></a>
+                </div>
             </div>
         </div>
         <!-- Main Branding Bar -->
@@ -286,20 +354,19 @@
             </div>
         </div>
         <!-- Navigation Bar -->
-        <nav class="bg-[#FDD661] shadow-md sticky top-0 z-50">
+        <nav class="bg-[#FDD661] shadow-md">
             <div class="max-w-[1280px] mx-auto px-margin-mobile py-3 md:px-0 relative flex items-center justify-center">
                 <button id="mobile-menu-toggle"
-                    class="md:hidden absolute left-4 text-[#7B0000] bg-white p-3 rounded-md shadow-sm border border-[#7B0000]/15">
+                    class="lg:hidden absolute left-4 text-[#7B0000] bg-white p-3 rounded-md shadow-sm border border-[#7B0000]/15">
                     <i class="bi bi-list"></i>
                 </button>
-                <div class="hidden md:flex items-center gap-8 overflow-x-auto no-scrollbar justify-center">
+                <div class="hidden lg:flex items-center gap-8 overflow-x-visible no-scrollbar justify-center">
                     <a class="font-label-md text-[13px] text-[#7B0000] font-bold border-b-2 border-[#7B0000] uppercase"
                         href="#">Home</a>
                     <div class="relative group">
                         <button type="button"
                             class="font-label-md text-[13px] text-[#410000] hover:text-[#7B0000] flex items-center gap-1 transition-colors uppercase">
                             About Us <i class="bi bi-chevron-down text-[14px]"></i></button>
-                        </button>
                         <div
                             class="desktop-submenu absolute left-0 top-full mt-2 hidden group-hover:block bg-white border border-outline-variant/30 shadow-xl rounded-lg py-2">
                             <a class="block px-4 py-2 text-sm text-on-surface hover:bg-[#FDD661]/80"
@@ -341,7 +408,14 @@
                     </div>
                 </div>
             </div>
-            <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-outline-variant/30">
+            <div id="mobile-menu-backdrop" class="hidden fixed inset-0 bg-black/40 z-40 opacity-0 transition-opacity duration-300"></div>
+            <div id="mobile-menu" class="fixed inset-y-0 right-0 w-[280px] max-w-full bg-white border-l border-outline-variant/30 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 lg:hidden">
+                <div class="flex items-center justify-between px-4 py-4 border-b border-outline-variant/20">
+                    <span class="font-bold text-[#7B0000] uppercase text-sm">Menu</span>
+                    <button id="mobile-menu-close" type="button" class="text-[#7B0000] bg-[#FDD661] p-2 rounded-md shadow-sm">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
                 <div class="flex flex-col gap-1 px-4 py-4">
                     <a class="font-label-md text-[14px] text-[#7B0000] font-bold uppercase py-2" href="#">Home</a>
                     <div class="border-t border-outline-variant/20 pt-3">
@@ -370,25 +444,25 @@
     </header>
     <main>
         <!-- Hero Section -->
-        <section class="relative w-full h-[870px] flex items-center overflow-hidden">
+        <section class="relative w-full h-[760px] sm:h-[870px] flex items-center overflow-hidden hero-section">
             <div class="absolute inset-0 bg-gradient-to-r from-tertiary via-tertiary/80 to-transparent z-10"></div>
             <img alt="School Campus" class="absolute inset-0 w-full h-full object-cover" src="assets/slider-01.jpg" />
-            <div class="relative z-20 px-margin-desktop max-w-[1280px] mx-auto w-full">
+            <div class="relative z-20 px-5 max-w-[1280px] mx-auto w-full">
                 <div class="max-w-2xl text-on-primary">
                     <span
                         class="inline-block px-4 py-1 bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md rounded mb-6">ADMISSION
                         OPEN 2024-25</span>
-                    <h1 class="font-display-lg text-display-lg mb-6 leading-tight">Empowering Students Through Knowledge
+                    <h1 class="hero-heading font-display-lg text-[1.9rem] sm:text-[2rem] mb-6 leading-tight">Empowering Students Through Knowledge
                         &amp; Values</h1>
-                    <p class="font-body-lg text-body-lg opacity-90 mb-10 max-w-lg">A tradition of excellence in
+                    <p class="hero-copy font-body-lg text-[15px] sm:text-body-lg opacity-90 mb-10 max-w-lg">A tradition of excellence in
                         education and character building. We nurture young minds to become future leaders with strong
                         moral foundations.</p>
-                    <div class="flex gap-4">
+                    <div class="flex flex-wrap gap-4">
                         <button
-                            class="px-8 py-4 bg-secondary-container text-on-secondary-container font-headline-md text-headline-md rounded-lg shadow-xl hover:scale-105 transition-transform">Explore
+                            class="px-6 py-3 sm:px-8 sm:py-4 bg-secondary-container text-on-secondary-container font-headline-md text-headline-md rounded-lg shadow-xl hover:scale-105 transition-transform">Explore
                             Campus</button>
                         <button
-                            class="px-8 py-4 border-2 border-on-primary text-on-primary font-headline-md text-headline-md rounded-lg hover:bg-on-primary hover:text-primary transition-all">Learn
+                            class="px-6 py-3 sm:px-8 sm:py-4 border-2 border-on-primary text-on-primary font-headline-md text-headline-md rounded-lg hover:bg-on-primary hover:text-primary transition-all">Learn
                             More</button>
                     </div>
                 </div>
@@ -396,7 +470,7 @@
         </section>
         <!-- Feature Highlights -->
         <section class="bg-primary py-24">
-            <div class="max-w-[1280px] mx-auto px-margin-desktop flex flex-col lg:flex-row gap-16 items-center">
+            <div class="max-w-[1280px] mx-auto px-5 flex flex-col lg:flex-row gap-16 items-center">
                 <div class="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="glass-card p-8 rounded-xl group hover:bg-white/20 transition-all cursor-pointer">
                         <i class="bi bi-people text-secondary-fixed text-4xl mb-4"></i>
@@ -424,7 +498,7 @@
                     </div>
                 </div>
                 <div class="w-full lg:w-1/2">
-                    <h2 class="font-display-lg text-display-lg text-secondary-fixed mb-6 leading-tight">Discover Our Top
+                    <h2 class="font-display-lg text-display-lg md:text-3xl  text-secondary-fixed mb-6 leading-tight">Discover Our Top
                         School Child Benefits</h2>
                     <p class="font-body-lg text-body-lg text-on-primary opacity-80 mb-8">We provide a nurturing
                         environment where every child's potential is recognized and cultivated through personalized
@@ -447,13 +521,13 @@
             </div>
         </section>
         <!-- About Section -->
-        <section class="py-24 bg-surface">
-            <div class="max-w-[1280px] mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <section class="py-20 bg-surface">
+            <div class="max-w-[1280px] mx-auto px-5 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <div class="relative">
                     <div class="absolute -top-6 -left-6 w-32 h-32 bg-secondary-fixed rounded-xl -z-10"></div>
-                    <img alt="Academic Excellence" class="w-full h-[500px] object-cover rounded-2xl shadow-2xl"
+                    <img alt="Academic Excellence" class="w-full h-auto sm:h-[500px] object-cover rounded-2xl shadow-2xl"
                         src="assets/about01.jpeg" />
-                    <div class="absolute -bottom-10 -right-10 bg-on-primary p-8 rounded-2xl shadow-xl max-w-xs">
+                    <div class="relative lg:absolute lg:-bottom-10 lg:-right-10 bg-on-primary p-6 lg:p-8 rounded-2xl shadow-xl max-w-xs mx-auto lg:mx-0 mt-6 lg:mt-0">
                         <h4 class="font-headline-md text-headline-md text-primary mb-2">40+ Years</h4>
                         <p class="font-body-md text-body-md text-on-surface-variant">Of shaping futures and building
                             character in Salem.</p>
@@ -472,10 +546,10 @@
             </div>
         </section>
         <!-- St. Joseph Section -->
-        <section class="py-24 bg-white">
-            <div class="max-w-[1280px] mx-auto px-margin-desktop flex flex-col lg:flex-row-reverse gap-20 items-center">
+        <section class="py-10 bg-white">
+            <div class="max-w-[1280px] mx-auto px-5 flex flex-col lg:flex-row-reverse gap-20 items-center">
                 <div class="w-full lg:w-1/2">
-                    <img alt="St. Joseph" class="w-full h-25 object-contain"
+                    <img alt="St. Joseph" class="w-full max-h-[360px] lg:max-h-[420px] object-contain mx-auto"
                         src="assets/about02.png" />
                 </div>
                 <div class="w-full lg:w-1/2">
@@ -492,14 +566,14 @@
         </section>
         <!-- Why We Are The Best -->
         <section class="py-16 bg-surface-bright text-center border-y border-outline-variant/30">
-            <div class="max-w-[1280px] mx-auto px-margin-desktop">
-                <h2 class="font-display-lg text-display-lg text-2xl tracking-[0.2em] text-on-surface uppercase opacity-80">WE ARE
+            <div class="max-w-[1280px] mx-auto px-5">
+                <h2 class="font-display-lg text-display-lg md:text-2xl tracking-[0.2em] text-on-surface uppercase opacity-80">WE ARE
                     THE BEST</h2>
             </div>
         </section>
         <!-- Management Speak -->
         <section class="py-24 bg-white">
-            <div class="max-w-[1280px] mx-auto px-margin-desktop">
+            <div class="max-w-[1280px] mx-auto px-5">
                 <div
                     class="grid grid-cols-1 lg:grid-cols-12 gap-0 border border-outline-variant/30 rounded-lg overflow-hidden shadow-sm">
                     <div class="lg:col-span-4 bg-surface-container relative">
@@ -532,9 +606,9 @@
         </section>
         <!-- Carousel & Links Section -->
         <section class="py-24 bg-surface-container-low">
-            <div class="max-w-[1280px] mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div class="max-w-[1280px] mx-auto px-5 grid grid-cols-1 lg:grid-cols-12 gap-12">
                 <!-- Carousel Area -->
-                <div class="lg:col-span-8 relative rounded-2xl overflow-hidden shadow-2xl carousel-container">
+                <div class="lg:col-span-6 relative rounded-2xl overflow-hidden shadow-2xl carousel-container">
                     <img alt="School Event 1" class="carousel-image w-full h-[600px] object-cover"
                         src="assets/gallery01.jpg" />
                     <img alt="School Event 2" class="carousel-image hidden w-full h-[600px] object-cover"
@@ -553,30 +627,36 @@
                     </div>
                 </div>
                 <!-- Side Links with Marquee -->
-                <div class="lg:col-span-4 flex flex-col gap-4">
+                <div class="lg:col-span-6 flex flex-col gap-4">
                     <h4 class="font-headline-md text-headline-md text-primary mb-4">Latest Events</h4>
                     <div class="marquee-container">
                         <div class="marquee-content">
-                            <a class="marquee-item group flex items-center gap-3 cursor-pointer" href="#">
-                                <span class="font-headline-md text-headline-md text-primary group-hover:text-secondary-fixed transition-colors">Craft Expo '25</span>
+                            <a class="marquee-item group flex items-center gap-3 cursor-pointer bg-[#FFF3D6] border border-[#FDD661]" href="#">
+                                <i class="bi bi-megaphone-fill text-secondary-fixed text-xl"></i>
+                                <span class="font-headline-md text-headline-md text-[#1d1c0c] group-hover:text-secondary-fixed transition-colors">Craft Expo '25</span>
                                 <span class="inline-block px-2 py-1 bg-secondary-fixed text-[#410000] text-[10px] font-bold rounded">NEW</span>
                             </a>
-                            <a class="marquee-item group flex items-center gap-3 cursor-pointer" href="#">
-                                <span class="font-headline-md text-headline-md text-primary group-hover:text-secondary-fixed transition-colors">Talent Hunt</span>
+                            <a class="marquee-item group flex items-center gap-3 cursor-pointer bg-[#FFF3D6] border border-[#FDD661]" href="#">
+                                <i class="bi bi-calendar-event text-secondary-fixed text-xl"></i>
+                                <span class="font-headline-md text-headline-md text-[#1d1c0c] group-hover:text-secondary-fixed transition-colors">Talent Hunt</span>
                             </a>
-                            <a class="marquee-item group flex items-center gap-3 cursor-pointer" href="#">
-                                <span class="font-headline-md text-headline-md text-primary group-hover:text-secondary-fixed transition-colors">Sports Day 2025</span>
+                            <a class="marquee-item group flex items-center gap-3 cursor-pointer bg-[#FFF3D6] border border-[#FDD661]" href="#">
+                                <i class="bi bi-trophy text-secondary-fixed text-xl"></i>
+                                <span class="font-headline-md text-headline-md text-[#1d1c0c] group-hover:text-secondary-fixed transition-colors">Sports Day 2025</span>
                             </a>
-                            <a class="marquee-item group flex items-center gap-3 cursor-pointer" href="#">
-                                <span class="font-headline-md text-headline-md text-primary group-hover:text-secondary-fixed transition-colors">Annual Day</span>
+                            <a class="marquee-item group flex items-center gap-3 cursor-pointer bg-[#FFF3D6] border border-[#FDD661]" href="#">
+                                <i class="bi bi-stars text-secondary-fixed text-xl"></i>
+                                <span class="font-headline-md text-headline-md text-[#1d1c0c] group-hover:text-secondary-fixed transition-colors">Annual Day</span>
                             </a>
                             <!-- Duplicate for seamless loop -->
-                            <a class="marquee-item group flex items-center gap-3 cursor-pointer" href="#">
-                                <span class="font-headline-md text-headline-md text-primary group-hover:text-secondary-fixed transition-colors">Craft Expo '25</span>
+                            <a class="marquee-item group flex items-center gap-3 cursor-pointer bg-[#FFF3D6] border border-[#FDD661]" href="#">
+                                <i class="bi bi-megaphone-fill text-secondary-fixed text-xl"></i>
+                                <span class="font-headline-md text-headline-md text-[#1d1c0c] group-hover:text-secondary-fixed transition-colors">Craft Expo '25</span>
                                 <span class="inline-block px-2 py-1 bg-secondary-fixed text-[#410000] text-[10px] font-bold rounded">NEW</span>
                             </a>
-                            <a class="marquee-item group flex items-center gap-3 cursor-pointer" href="#">
-                                <span class="font-headline-md text-headline-md text-primary group-hover:text-secondary-fixed transition-colors">Talent Hunt</span>
+                            <a class="marquee-item group flex items-center gap-3 cursor-pointer bg-[#FFF3D6] border border-[#FDD661]" href="#">
+                                <i class="bi bi-calendar-event text-secondary-fixed text-xl"></i>
+                                <span class="font-headline-md text-headline-md text-[#1d1c0c] group-hover:text-secondary-fixed transition-colors">Talent Hunt</span>
                             </a>
                         </div>
                     </div>
@@ -585,13 +665,13 @@
         </section>
         <!-- YouTube & Spotlight Section -->
         <section class="py-24 bg-secondary-fixed/20">
-            <div class="max-w-[1280px] mx-auto px-margin-desktop">
+            <div class="max-w-[1280px] mx-auto px-5">
                 <div class="mb-12">
-                    <h2 class="font-display-lg text-display-lg text-primary mb-8">Latest Video & Birthday Stars</h2>
+                    <h2 class="font-display-lg md:text-2xl text-display-lg text-primary mb-8">Latest Video & Birthday Stars</h2>
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     <!-- Featured Video -->
-                    <div class="lg:col-span-2">
+                    <div class="lg:col-span-6">
                         <div class="bg-black rounded-xl overflow-hidden shadow-2xl">
                             <div id="featured-video" class="aspect-video bg-black/90 flex items-center justify-center">
                                 <div class="text-center text-white/60">
@@ -613,7 +693,7 @@
                     </div>
 
                     <!-- Birthday Photos Scroll -->
-                    <div class="lg:col-span-1">
+                    <div class="lg:col-span-6">
                         <h3 class="font-headline-md text-headline-md mb-6 text-primary">Birthday Stars</h3>
                         <div class="photo-scroll-container rounded-2xl overflow-hidden border border-white/10 bg-white/10">
                             <div class="photo-scroll-content">
@@ -675,10 +755,10 @@
                     d="M0,160L40,181.3C80,203,160,245,240,245.3C320,245,400,203,480,186.7C560,171,640,181,720,176C800,171,880,149,960,154.7C1040,160,1120,192,1200,197.3C1280,203,1360,181,1400,170.7L1440,160L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"
                     fill="none" stroke="white" stroke-width="0.5"></path>
             </svg>
-            <div class="relative z-10 max-w-[1280px] mx-auto px-margin-desktop">
+            <div class="relative z-10 max-w-[1280px] mx-auto px-5">
                 <h3 class="font-label-md text-label-md text-secondary-fixed tracking-[0.3em] uppercase mb-6">THOUGHT OF
                     THE DAY</h3>
-                <h2 class="font-display-lg text-display-lg text-on-primary italic leading-tight">"Don’t Judge Your
+                <h2 class="font-display-lg md:text-2xl  text-display-lg text-on-primary italic leading-tight">"Don’t Judge Your
                     Future On Your Past"</h2>
                 <div class="mt-8 flex justify-center">
                     <div class="w-16 h-1 bg-secondary-fixed"></div>
@@ -687,7 +767,7 @@
         </section>
         <!-- Photo Grid -->
         <section class="py-24 bg-white">
-            <div class="max-w-[1280px] mx-auto px-margin-desktop space-y-12">
+            <div class="max-w-[1280px] mx-auto px-5 space-y-12">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="aspect-[4/3] bg-surface-container-high rounded overflow-hidden shadow-md">
                         <img alt="Gallery 1" class="w-full h-full object-cover"
@@ -711,19 +791,17 @@
         </section>
     </main>
     <!-- Footer -->
-    <footer class="w-full py-20 px-margin-desktop bg-primary text-on-primary">
-        <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+    <footer class="w-full py-10 px-5 bg-primary text-on-primary">
+        <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             <!-- Logo & Map -->
             <div class="md:col-span-1 space-y-6">
                 <div class="font-display-lg text-headline-md tracking-tighter uppercase leading-none">
-                    ST. JOSEPH'S <span class="block text-secondary-fixed text-[14px]">MATRICULATION HIGHER SECONDARY
-                        SCHOOL</span>
+                 <img src="assets/logo-Footer.png" alt="">
                 </div>
                 <p class="font-headline-md text-[14px] text-secondary-fixed uppercase tracking-widest">Campus Location
                 </p>
                 <div class="w-full aspect-video bg-white/10 rounded overflow-hidden border border-white/20">
-                    <img alt="Map" class="w-full h-full object-cover opacity-50 contrast-125"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYRTbqis5ton57_eTlzq3W0JE1cFElvQi0ASFKJRctdysru0Mo9gK9KCkRywc363rQBtVfDbog_rlTI2NN4TMxrfM0hXV57pjBejZ5VRiipnBikmuBu-2grf_wQGuWDXTAiEKLRF8yVESowRs0Q_Jip4s50xEo0QWRrnpzw0tV8DdjPVgQIm0ioRY2JwyQ_OR4x2uabTg6znmYpNk21CSnDpEGFBekLonztwWEkPuU9Dq9Wn6S-7Y9JgZNtkBa22hIXJHsMyvRn-ph" />
+                 <iframe src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d500188.30316366703!2d78.146335!3d11.643211!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTHCsDM4JzM1LjYiTiA3OMKwMDgnNDYuOCJF!5e0!3m2!1sen!2sus!4v1779343018199!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
             <!-- Quick Links -->
@@ -768,17 +846,51 @@
             </div>
         </div>
         <div class="mt-20 pt-8 border-t border-white/10 text-center font-body-md text-[12px] text-on-primary/40">
-            Copyright © 2024 St. Joseph's Matriculation Higher Secondary School, Gugai, Salem. | Powered by Boscosoft
+            Copyright © 2024 St. Joseph's Matriculation Higher Secondary School, Gugai, Salem. | Powered by <a href="http://boscosofttech.com/" target="_blank" class="hover:text-secondary-fixed transition-colors">Boscosoft</a>
         </div>
     </footer>
     <script>
         const mobileToggle = document.getElementById('mobile-menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
-        if (mobileToggle && mobileMenu) {
-            mobileToggle.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
+        const mobileBackdrop = document.getElementById('mobile-menu-backdrop');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+        function openMobileMenu() {
+            if (mobileMenu && mobileBackdrop) {
+                mobileBackdrop.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    mobileBackdrop.classList.remove('opacity-0');
+                    mobileBackdrop.classList.add('opacity-100');
+                });
+                mobileMenu.classList.remove('translate-x-full');
+                mobileMenu.classList.add('translate-x-0');
+            }
         }
+
+        function closeMobileMenu() {
+            if (mobileMenu && mobileBackdrop) {
+                mobileBackdrop.classList.remove('opacity-100');
+                mobileBackdrop.classList.add('opacity-0');
+                mobileMenu.classList.add('translate-x-full');
+                mobileMenu.classList.remove('translate-x-0');
+                setTimeout(() => {
+                    if (mobileBackdrop) {
+                        mobileBackdrop.classList.add('hidden');
+                    }
+                }, 300);
+            }
+        }
+
+        if (mobileToggle) {
+            mobileToggle.addEventListener('click', openMobileMenu);
+        }
+        if (mobileMenuClose) {
+            mobileMenuClose.addEventListener('click', closeMobileMenu);
+        }
+        if (mobileBackdrop) {
+            mobileBackdrop.addEventListener('click', closeMobileMenu);
+        }
+
         document.querySelectorAll('[data-mobile-target]').forEach(button => {
             button.addEventListener('click', () => {
                 const targetId = button.getAttribute('data-mobile-target');
@@ -788,6 +900,14 @@
                 }
             });
         });
+
+        const mobileContactToggle = document.getElementById('mobile-contact-toggle');
+        const mobileContactPanel = document.getElementById('mobile-contact-panel');
+        if (mobileContactToggle && mobileContactPanel) {
+            mobileContactToggle.addEventListener('click', () => {
+                mobileContactPanel.classList.toggle('hidden');
+            });
+        }
 
         // Carousel functionality
         let currentSlide = 0;
