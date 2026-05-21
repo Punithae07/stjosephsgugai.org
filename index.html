@@ -9,9 +9,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-3e6Z4DgRqaY3wjQfqCZVSFzrB5pRzGQlUu7ZyLgppxR7Jp8S+QCq5KdAvUQKxA2a4N2k1z0Qts1K4Lmxed8fNQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -129,6 +127,109 @@
             background-image: radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.1) 1px, transparent 0);
             background-size: 24px 24px;
         }
+
+        /* Carousel Animation */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-image {
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .carousel-image.hidden {
+            display: none;
+        }
+
+        /* Marquee Animation */
+        @keyframes marqueeLeft {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .marquee-container {
+            overflow: hidden;
+            height: auto;
+            position: relative;
+            padding: 12px 0;
+        }
+
+        .marquee-content {
+            animation: marqueeUp 18s linear infinite;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            white-space: nowrap;
+        }
+
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+
+        .marquee-item {
+            flex-shrink: 0;
+            padding: 16px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .marquee-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Birthday photo auto-scroll */
+        @keyframes photoScroll {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        .photo-scroll-container {
+            height: 600px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 24px;
+        }
+
+        .photo-scroll-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            animation: photoScroll 18s linear infinite;
+            padding: 20px;
+        }
+
+        .photo-scroll-content:hover {
+            animation-play-state: paused;
+        }
+
+        .photo-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .photo-card img {
+            display: block;
+        }
+
+        .photo-card h4 {
+            margin-bottom: 0.25rem;
+        }
     </style>
 </head>
 
@@ -139,24 +240,24 @@
             class="bg-[#7B0000] text-white py-2 px-margin-mobile md:px-margin-desktop flex justify-between items-center h-10">
             <div class="flex items-center gap-6">
                 <div class="flex items-center gap-2 group cursor-pointer">
-                    <i class="fa-solid fa-phone text-[14px]"></i>
+                    <i class="bi bi-telephone text-[14px]"></i>
                     <span class="font-label-md text-[16px]">0427-2465336</span>
                 </div>
                 <div class="flex items-center gap-2 group cursor-pointer">
-                    <i class="fa-solid fa-envelope text-[14px]"></i>
+                    <i class="bi bi-envelope text-[14px]"></i>
                     <span class="font-label-md text-[16px]">stjosephss@gmail.com</span>
                 </div>
             </div>
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-3 mr-4">
                     <a class="hover:text-secondary-fixed transition-colors" href="#"><i
-                            class="fa-brands fa-facebook-f text-[14px]"></i></a>
+                            class="bi bi-facebook text-[14px]"></i></a>
                     <a class="hover:text-secondary-fixed transition-colors" href="#"><i
-                            class="fa-brands fa-instagram text-[14px]"></i></a>
+                            class="bi bi-instagram text-[14px]"></i></a>
                     <a class="hover:text-secondary-fixed transition-colors" href="#"><i
-                            class="fa-brands fa-youtube text-[14px]"></i></a>
+                            class="bi bi-youtube text-[14px]"></i></a>
                     <a class="hover:text-secondary-fixed transition-colors" href="#"><i
-                            class="fa-brands fa-twitter text-[14px]"></i></a>
+                            class="bi bi-twitter text-[14px]"></i></a>
                 </div>
                 <button
                     class="bg-[#E8C350] text-[#410000] px-4 py-1.5 rounded-sm font-bold text-[11px] uppercase tracking-wider hover:bg-secondary-fixed transition-colors">Online
@@ -189,7 +290,7 @@
             <div class="max-w-[1280px] mx-auto px-margin-mobile py-3 md:px-0 relative flex items-center justify-center">
                 <button id="mobile-menu-toggle"
                     class="md:hidden absolute left-4 text-[#7B0000] bg-white p-3 rounded-md shadow-sm border border-[#7B0000]/15">
-                    <i class="fa-solid fa-bars"></i>
+                    <i class="bi bi-list"></i>
                 </button>
                 <div class="hidden md:flex items-center gap-8 overflow-x-auto no-scrollbar justify-center">
                     <a class="font-label-md text-[13px] text-[#7B0000] font-bold border-b-2 border-[#7B0000] uppercase"
@@ -197,7 +298,7 @@
                     <div class="relative group">
                         <button type="button"
                             class="font-label-md text-[13px] text-[#410000] hover:text-[#7B0000] flex items-center gap-1 transition-colors uppercase">
-                            About Us <i class="fa-solid fa-chevron-down text-[14px]"></i>
+                            About Us <i class="bi bi-chevron-down text-[14px]"></i></button>
                         </button>
                         <div
                             class="desktop-submenu absolute left-0 top-full mt-2 hidden group-hover:block bg-white border border-outline-variant/30 shadow-xl rounded-lg py-2">
@@ -211,13 +312,13 @@
                     <div class="relative group">
                         <button type="button"
                             class="font-label-md text-[13px] text-[#410000] hover:text-[#7B0000] flex items-center gap-1 transition-colors uppercase">
-                            Academics <i class="fa-solid fa-chevron-down text-[14px]"></i>
+                            Academics <i class="bi bi-chevron-down text-[14px]"></i>
                         </button>
                     </div>
                     <div class="relative group">
                         <button type="button"
                             class="font-label-md text-[13px] text-[#410000] hover:text-[#7B0000] flex items-center gap-1 transition-colors uppercase">
-                            Management <i class="fa-solid fa-chevron-down text-[14px]"></i>
+                            Management <i class="bi bi-chevron-down text-[14px]"></i>
                         </button>
                     </div>
                     <a class="font-label-md text-[13px] text-[#410000] hover:text-[#7B0000] transition-colors uppercase"
@@ -225,7 +326,7 @@
                     <div class="relative group">
                         <button type="button"
                             class="font-label-md text-[13px] text-[#410000] hover:text-[#7B0000] flex items-center gap-1 transition-colors uppercase">
-                            Students <i class="fa-solid fa-chevron-down text-[14px]"></i>
+                            Students <i class="bi bi-chevron-down text-[14px]"></i>
                         </button>
                     </div>
                     <a class="font-label-md text-[13px] text-[#410000] hover:text-[#7B0000] transition-colors uppercase"
@@ -235,7 +336,7 @@
                     <div class="relative group">
                         <button type="button"
                             class="font-label-md text-[13px] text-[#410000] hover:text-[#7B0000] flex items-center gap-1 transition-colors uppercase">
-                            Gallery <i class="fa-solid fa-chevron-down text-[14px]"></i>
+                            Gallery <i class="bi bi-chevron-down text-[14px]"></i>
                         </button>
                     </div>
                 </div>
@@ -247,7 +348,7 @@
                         <button data-mobile-target="about-submenu"
                             class="w-full flex items-center justify-between gap-2 text-left font-label-md text-[14px] text-on-surface uppercase py-2">
                             <span>About Us</span>
-                            <i class="fa-solid fa-chevron-down"></i>
+                            <i class="bi bi-chevron-down"></i>
                         </button>
                         <div id="about-submenu" class="hidden flex flex-col gap-1 pl-4 mt-2">
                             <a class="py-2 text-sm text-on-surface hover:text-secondary-fixed" href="#">History</a>
@@ -298,29 +399,25 @@
             <div class="max-w-[1280px] mx-auto px-margin-desktop flex flex-col lg:flex-row gap-16 items-center">
                 <div class="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="glass-card p-8 rounded-xl group hover:bg-white/20 transition-all cursor-pointer">
-                        <span class="material-symbols-outlined text-secondary-fixed text-4xl mb-4"
-                            data-icon="groups">groups</span>
+                        <i class="bi bi-people text-secondary-fixed text-4xl mb-4"></i>
                         <h3 class="font-headline-md text-headline-md text-on-primary mb-2">Community</h3>
                         <p class="font-body-md text-body-md text-on-primary/80">Fostering a sense of belonging and
                             mutual respect among students.</p>
                     </div>
                     <div class="glass-card p-8 rounded-xl group hover:bg-white/20 transition-all cursor-pointer">
-                        <span class="material-symbols-outlined text-secondary-fixed text-4xl mb-4"
-                            data-icon="school">school</span>
+                        <i class="bi bi-mortarboard text-secondary-fixed text-4xl mb-4"></i>
                         <h3 class="font-headline-md text-headline-md text-on-primary mb-2">Academics</h3>
                         <p class="font-body-md text-body-md text-on-primary/80">Rigorous curriculum designed for
                             holistic intellectual growth.</p>
                     </div>
                     <div class="glass-card p-8 rounded-xl group hover:bg-white/20 transition-all cursor-pointer">
-                        <span class="material-symbols-outlined text-secondary-fixed text-4xl mb-4"
-                            data-icon="assignment_ind">assignment_ind</span>
+                        <i class="bi bi-clipboard-check text-secondary-fixed text-4xl mb-4"></i>
                         <h3 class="font-headline-md text-headline-md text-on-primary mb-2">Admission</h3>
                         <p class="font-body-md text-body-md text-on-primary/80">Transparent process for joining our
                             esteemed institution.</p>
                     </div>
                     <div class="glass-card p-8 rounded-xl group hover:bg-white/20 transition-all cursor-pointer">
-                        <span class="material-symbols-outlined text-secondary-fixed text-4xl mb-4"
-                            data-icon="sports_soccer">sports_soccer</span>
+                        <i class="bi bi-trophy text-secondary-fixed text-4xl mb-4"></i>
                         <h3 class="font-headline-md text-headline-md text-on-primary mb-2">Activities</h3>
                         <p class="font-body-md text-body-md text-on-primary/80">Wide range of co-curricular activities
                             to spark creativity.</p>
@@ -334,18 +431,15 @@
                         attention and world-class facilities.</p>
                     <ul class="space-y-4">
                         <li class="flex items-center gap-4 text-on-primary">
-                            <span class="material-symbols-outlined text-secondary-fixed"
-                                data-icon="check_circle">check_circle</span>
+                            <i class="bi bi-check-circle text-secondary-fixed"></i>
                             <span class="font-body-md text-body-md">Smart Classrooms &amp; Modern Labs</span>
                         </li>
                         <li class="flex items-center gap-4 text-on-primary">
-                            <span class="material-symbols-outlined text-secondary-fixed"
-                                data-icon="check_circle">check_circle</span>
+                            <i class="bi bi-check-circle text-secondary-fixed"></i>
                             <span class="font-body-md text-body-md">Expert Faculty with Decades of Experience</span>
                         </li>
                         <li class="flex items-center gap-4 text-on-primary">
-                            <span class="material-symbols-outlined text-secondary-fixed"
-                                data-icon="check_circle">check_circle</span>
+                            <i class="bi bi-check-circle text-secondary-fixed"></i>
                             <span class="font-body-md text-body-md">Value-Based Catholic Education System</span>
                         </li>
                     </ul>
@@ -358,7 +452,7 @@
                 <div class="relative">
                     <div class="absolute -top-6 -left-6 w-32 h-32 bg-secondary-fixed rounded-xl -z-10"></div>
                     <img alt="Academic Excellence" class="w-full h-[500px] object-cover rounded-2xl shadow-2xl"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtreZS4LJJtov3ZYSZ3t6JoFLMreZrcuV28o2-EwjkekSsfbUwrPp1uhREJ-xu0e2-yhYHf2U7ow3cIeGb8j1NsWIsKgvWMhLtLnVVsbfDF29d3BbkMtC-OQSFiX80_pY0aBzIgHLsyGCY7vTjeDz7TFViIMpZPUG3diTJO1-R571NRnl-XEnq3HxFN0vtR_2mIi1ekXNTVC254tcXycIQSsJQ6GQ1cOUZBJa6lhJT5qcDhYn0w29rqj8Cmc9FDtQzkax0Fydwj8u9" />
+                        src="assets/about01.jpeg" />
                     <div class="absolute -bottom-10 -right-10 bg-on-primary p-8 rounded-2xl shadow-xl max-w-xs">
                         <h4 class="font-headline-md text-headline-md text-primary mb-2">40+ Years</h4>
                         <p class="font-body-md text-body-md text-on-surface-variant">Of shaping futures and building
@@ -373,7 +467,7 @@
                         educational institutions in different parts of the world.</p>
                     <button
                         class="px-6 py-2 bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md rounded-full flex items-center gap-2 hover:bg-secondary-container transition-all">Know
-                        More <span class="material-symbols-outlined text-[18px]">arrow_circle_right</span></button>
+                        More <i class="bi bi-arrow-right text-[18px]"></i></button>
                 </div>
             </div>
         </section>
@@ -381,8 +475,8 @@
         <section class="py-24 bg-white">
             <div class="max-w-[1280px] mx-auto px-margin-desktop flex flex-col lg:flex-row-reverse gap-20 items-center">
                 <div class="w-full lg:w-1/2">
-                    <img alt="St. Joseph" class="w-full h-auto object-contain"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbOVgIeL_aUgDCONBJXXQgDWlezl6jKyvAzm8d0ZswiOUU97OspV6AU_xKWu1ImWcHg2uWXdcSBegXjQ2PH3iiwtpVKOgcGMKfCvEZTr75gG49rHPUQSgV5ofYjknhp7MdDUWGth2GENWSL-Jk58XmVvxhsaXq24SLRYa8m0J59YcPL4AAC2C-_PEzfKCpdFlss1OwSWbUsATFhQQPfXWWMkeuhHXCRqrzbFwaktpA5jIJ8h4a3h77wW36ZnnPRCvu8Wpo-VIVJy_G" />
+                    <img alt="St. Joseph" class="w-full h-25 object-contain"
+                        src="assets/about02.png" />
                 </div>
                 <div class="w-full lg:w-1/2">
                     <p class="font-body-lg text-body-lg text-on-surface mb-10 leading-relaxed">St. Joseph (flourished
@@ -392,14 +486,14 @@
                         life is recorded in the Gospels, particularly Matthew and Luke.</p>
                     <button
                         class="px-6 py-2 bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md rounded-full flex items-center gap-2 hover:bg-secondary-container transition-all">Know
-                        More <span class="material-symbols-outlined text-[18px]">arrow_circle_right</span></button>
+                        More <i class="bi bi-arrow-right text-[18px]"></i></button>
                 </div>
             </div>
         </section>
         <!-- Why We Are The Best -->
         <section class="py-16 bg-surface-bright text-center border-y border-outline-variant/30">
             <div class="max-w-[1280px] mx-auto px-margin-desktop">
-                <h2 class="font-display-lg text-display-lg tracking-[0.2em] text-on-surface uppercase opacity-80">WE ARE
+                <h2 class="font-display-lg text-display-lg text-2xl tracking-[0.2em] text-on-surface uppercase opacity-80">WE ARE
                     THE BEST</h2>
             </div>
         </section>
@@ -410,7 +504,7 @@
                     class="grid grid-cols-1 lg:grid-cols-12 gap-0 border border-outline-variant/30 rounded-lg overflow-hidden shadow-sm">
                     <div class="lg:col-span-4 bg-surface-container relative">
                         <img alt="Principal" class="w-full h-full object-cover grayscale-[20%]"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2dNKgsXdIRaRd5cscETU4uRqs-WXqkQKDbgB4kHsGApdGVR9UYwjutxgbMr1tUxJeEA3sbBTl8Q3FPYhORe2jtKsBFtu9iy5PajkwddqTVZX4UdNZ0UV7Sc0fc42lArpgklwcv6pEmB5xrSID3n4SwITZ8wysjlI_k018XEpZEbNQ4_JMO1XBSnEGKTZraULmz6zCf8leNuGUCiDYxuF0SiRcSSyfja4SpZBDqXxdHjLK14quOFFAf21fU79hLETvH_NTIq9Lpz5Y" />
+                            src="assets/principal.jpg" />
                         <div
                             class="absolute bottom-4 left-4 right-4 bg-primary/90 text-on-primary py-2 px-4 rounded text-center">
                             <p class="font-label-md text-[14px]">Sr. Jancy K.K. M.A., M.Ed., M.Phil., - <span
@@ -431,7 +525,7 @@
                         </p>
                         <button
                             class="px-6 py-2 bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md rounded-full flex items-center gap-2 self-end hover:bg-secondary-container transition-all">Know
-                            More <span class="material-symbols-outlined text-[18px]">arrow_circle_right</span></button>
+                            More <i class="bi bi-arrow-right text-[18px]"></i></button>
                     </div>
                 </div>
             </div>
@@ -440,90 +534,135 @@
         <section class="py-24 bg-surface-container-low">
             <div class="max-w-[1280px] mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-12">
                 <!-- Carousel Area -->
-                <div class="lg:col-span-8 relative rounded-2xl overflow-hidden shadow-2xl">
-                    <img alt="School Event" class="w-full h-[600px] object-cover"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHGUoUiR5HIBJRLGVOXFDMgI-1v5vKXuE8jB2zZYcvti-o-3qJ11eH68tEf4BV-V6Ey9myIcxLo8UVjquYnRgkyCblfnfpg4LZUgKyiH1o-XIiScQoS3fJHgc0dt6B5lR23MGyeV3Pj0M_z1HS2MXsQJUuT0KFZ5Wym6P40fH-OaSKKBNj5t1f3hljtXu4zWqNDxmIJONQQKCiIDzC9ruHsr65B11ogB0mXHadFipa5v1M_ie3po8y5Czz9HgqYaotoq59QJgXWyGB" />
+                <div class="lg:col-span-8 relative rounded-2xl overflow-hidden shadow-2xl carousel-container">
+                    <img alt="School Event 1" class="carousel-image w-full h-[600px] object-cover"
+                        src="assets/gallery01.jpg" />
+                    <img alt="School Event 2" class="carousel-image hidden w-full h-[600px] object-cover"
+                        src="assets/gallery02.jpg" />
+                    <img alt="School Event 3" class="carousel-image hidden w-full h-[600px] object-cover"
+                        src="assets/gallery03.jpg" />
                     <div class="absolute inset-y-0 left-4 flex items-center">
-                        <button
-                            class="w-12 h-12 bg-black/30 rounded-full flex items-center justify-center text-white hover:bg-black/50"><span
-                                class="material-symbols-outlined">chevron_left</span></button>
+                        <button id="carousel-prev"
+                            class="w-12 h-12 bg-black/30 rounded-full flex items-center justify-center text-white hover:bg-black/50 transition-all"><i
+                                class="bi bi-chevron-left"></i></button>
                     </div>
                     <div class="absolute inset-y-0 right-4 flex items-center">
-                        <button
-                            class="w-12 h-12 bg-black/30 rounded-full flex items-center justify-center text-white hover:bg-black/50"><span
-                                class="material-symbols-outlined">chevron_right</span></button>
+                        <button id="carousel-next"
+                            class="w-12 h-12 bg-black/30 rounded-full flex items-center justify-center text-white hover:bg-black/50 transition-all"><i
+                                class="bi bi-chevron-right"></i></button>
                     </div>
                 </div>
-                <!-- Side Links -->
-                <div class="lg:col-span-4 flex flex-col gap-6 py-8">
-                    <a class="group flex items-center gap-3" href="#">
-                        <span class="font-headline-md text-headline-md text-primary group-hover:underline">Craft Expo
-                            '25</span>
-                        <img alt="New" class="h-4"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrXOFEqwJOHqOUteoBNBAnlSmboRUim3OxAS9al7GVQmtGDkMWHQguhqDtnlK6S63yOuifnvihj0L6N0_hAVknxtAzmSK7ti9bB1namOfZfQKAhka2zTvMdRqpimpvrTlWo2jz68SmAu4XBNUwD4i79fhb5T-qo6E7ZQgoKzbe0RrBG9g_xZsDnj27gce5d8yQsFFogPscjVvx_C6hYMmZnvlik-G79I3LIgqGwWPcMwv2WmtKa9GL50O7bZAi6OqZDcNORrIk-HQU" />
-                    </a>
-                    <a class="group flex items-center gap-3" href="#">
-                        <span class="font-headline-md text-headline-md text-primary group-hover:underline">Talent
-                            Hunt</span>
-                    </a>
+                <!-- Side Links with Marquee -->
+                <div class="lg:col-span-4 flex flex-col gap-4">
+                    <h4 class="font-headline-md text-headline-md text-primary mb-4">Latest Events</h4>
+                    <div class="marquee-container">
+                        <div class="marquee-content">
+                            <a class="marquee-item group flex items-center gap-3 cursor-pointer" href="#">
+                                <span class="font-headline-md text-headline-md text-primary group-hover:text-secondary-fixed transition-colors">Craft Expo '25</span>
+                                <span class="inline-block px-2 py-1 bg-secondary-fixed text-[#410000] text-[10px] font-bold rounded">NEW</span>
+                            </a>
+                            <a class="marquee-item group flex items-center gap-3 cursor-pointer" href="#">
+                                <span class="font-headline-md text-headline-md text-primary group-hover:text-secondary-fixed transition-colors">Talent Hunt</span>
+                            </a>
+                            <a class="marquee-item group flex items-center gap-3 cursor-pointer" href="#">
+                                <span class="font-headline-md text-headline-md text-primary group-hover:text-secondary-fixed transition-colors">Sports Day 2025</span>
+                            </a>
+                            <a class="marquee-item group flex items-center gap-3 cursor-pointer" href="#">
+                                <span class="font-headline-md text-headline-md text-primary group-hover:text-secondary-fixed transition-colors">Annual Day</span>
+                            </a>
+                            <!-- Duplicate for seamless loop -->
+                            <a class="marquee-item group flex items-center gap-3 cursor-pointer" href="#">
+                                <span class="font-headline-md text-headline-md text-primary group-hover:text-secondary-fixed transition-colors">Craft Expo '25</span>
+                                <span class="inline-block px-2 py-1 bg-secondary-fixed text-[#410000] text-[10px] font-bold rounded">NEW</span>
+                            </a>
+                            <a class="marquee-item group flex items-center gap-3 cursor-pointer" href="#">
+                                <span class="font-headline-md text-headline-md text-primary group-hover:text-secondary-fixed transition-colors">Talent Hunt</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
         <!-- YouTube & Spotlight Section -->
         <section class="py-24 bg-secondary-fixed/20">
-            <div class="max-w-[1280px] mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-                <!-- YouTube Component -->
-                <div class="bg-black/90 rounded-xl overflow-hidden text-white">
-                    <div class="p-6 flex items-center justify-between border-b border-white/10">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                                <span class="material-symbols-outlined text-white">smart_display</span>
+            <div class="max-w-[1280px] mx-auto px-margin-desktop">
+                <div class="mb-12">
+                    <h2 class="font-display-lg text-display-lg text-primary mb-8">Latest Video & Birthday Stars</h2>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Featured Video -->
+                    <div class="lg:col-span-2">
+                        <div class="bg-black rounded-xl overflow-hidden shadow-2xl">
+                            <div id="featured-video" class="aspect-video bg-black/90 flex items-center justify-center">
+                                <div class="text-center text-white/60">
+                                    <i class="bi bi-play-circle text-5xl mb-4"></i>
+                                    <p>Loading latest video...</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-headline-md text-body-lg">St.Josephs Salem</h4>
-                                <div class="flex gap-4 text-[12px] opacity-60">
-                                    <span class="flex items-center gap-1"><span
-                                            class="material-symbols-outlined text-[14px]">videocam</span> 13</span>
-                                    <span class="flex items-center gap-1"><span
-                                            class="material-symbols-outlined text-[14px]">visibility</span> 94.1K</span>
+                            <div class="p-6 bg-black text-white">
+                                <h3 id="featured-title" class="font-headline-md text-headline-md mb-3 line-clamp-2">Latest Upload</h3>
+                                <p id="featured-description" class="text-body-md text-white/70 line-clamp-3">Fetching video information...</p>
+                                <div class="flex gap-6 mt-4 text-[12px] opacity-60 flex-wrap">
+                                    <span class="flex items-center gap-1"><i class="bi bi-calendar-event"></i> <span id="featured-date">--</span></span>
+                                    <a id="featured-link" href="#" target="_blank" class="flex items-center gap-1 hover:opacity-100 text-secondary-fixed">
+                                        <i class="bi bi-youtube"></i> Watch on YouTube
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="p-4 flex gap-4 text-[13px] border-b border-white/10">
-                        <button class="text-white border-b-2 border-white pb-1">Videos</button>
-                        <button class="text-white/60 pb-1">Playlists</button>
-                    </div>
-                    <div class="p-6">
-                        <div class="grid grid-cols-3 gap-4 mb-6">
-                            <div class="space-y-2">
-                                <div class="aspect-video bg-white/10 rounded"></div>
-                                <p class="text-[10px] line-clamp-2">ST. JOSEPH'S MAT...</p>
-                            </div>
-                            <div class="space-y-2">
-                                <div class="aspect-video bg-white/10 rounded"></div>
-                                <p class="text-[10px] line-clamp-2">St Joseph Matric Hr...</p>
-                            </div>
-                            <div class="space-y-2">
-                                <div class="aspect-video bg-white/10 rounded"></div>
-                                <p class="text-[10px] line-clamp-2">KIDS FEST - 2024- 2...</p>
+
+                    <!-- Birthday Photos Scroll -->
+                    <div class="lg:col-span-1">
+                        <h3 class="font-headline-md text-headline-md mb-6 text-primary">Birthday Stars</h3>
+                        <div class="photo-scroll-container rounded-2xl overflow-hidden border border-white/10 bg-white/10">
+                            <div class="photo-scroll-content">
+                                <div class="photo-card">
+                                    <img src="assets/student01.jfif" alt="Birthday Student 1" class="w-full h-48 object-cover">
+                                    <div class="p-4 bg-white/90">
+                                        <h4 class="font-label-md text-sm text-[#1d1c0c]">Anitha</h4>
+                                        <p class="text-[12px] text-[#59413d]/80">Birthday this week</p>
+                                    </div>
+                                </div>
+                                <div class="photo-card">
+                                    <img src="assets/student02.jfif" alt="Birthday Student 2" class="w-full h-48 object-cover">
+                                    <div class="p-4 bg-white/90">
+                                        <h4 class="font-label-md text-sm text-[#1d1c0c]">Kumar</h4>
+                                        <p class="text-[12px] text-[#59413d]/80">Birthday this week</p>
+                                    </div>
+                                </div>
+                                <div class="photo-card">
+                                    <img src="assets/student03.jfif" alt="Birthday Student 3" class="w-full h-48 object-cover">
+                                    <div class="p-4 bg-white/90">
+                                        <h4 class="font-label-md text-sm text-[#1d1c0c]">Priya</h4>
+                                        <p class="text-[12px] text-[#59413d]/80">Birthday this week</p>
+                                    </div>
+                                </div>
+                                <!-- duplicate items for seamless loop -->
+                                <div class="photo-card">
+                                    <img src="assets/student01.jfif" alt="Birthday Student 1" class="w-full h-48 object-cover">
+                                    <div class="p-4 bg-white/90">
+                                        <h4 class="font-label-md text-sm text-[#1d1c0c]">Anitha</h4>
+                                        <p class="text-[12px] text-[#59413d]/80">Birthday this week</p>
+                                    </div>
+                                </div>
+                                <div class="photo-card">
+                                    <img src="assets/student02.jfif" alt="Birthday Student 2" class="w-full h-48 object-cover">
+                                    <div class="p-4 bg-white/90">
+                                        <h4 class="font-label-md text-sm text-[#1d1c0c]">Kumar</h4>
+                                        <p class="text-[12px] text-[#59413d]/80">Birthday this week</p>
+                                    </div>
+                                </div>
+                                <div class="photo-card">
+                                    <img src="assets/student03.jfif" alt="Birthday Student 3" class="w-full h-48 object-cover">
+                                    <div class="p-4 bg-white/90">
+                                        <h4 class="font-label-md text-sm text-[#1d1c0c]">Priya</h4>
+                                        <p class="text-[12px] text-[#59413d]/80">Birthday this week</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <button
-                            class="w-full py-2 bg-white/10 hover:bg-white/20 text-[12px] rounded transition-colors uppercase tracking-widest font-bold">10
-                            more</button>
                     </div>
-                </div>
-                <!-- Student Spotlight -->
-                <div class="flex flex-col items-center">
-                    <div class="p-2 bg-on-tertiary-fixed-variant shadow-2xl inline-block rotate-[-1deg]">
-                        <div class="bg-white p-1">
-                            <img alt="Star Student" class="w-72 h-72 object-cover"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJRhgGogndwI4xr5ixD6rfgEiBRDr3WkXZgZ1oU7tF1z5JC_aiAisK78ZwmgEO9Ksn5B2jmA8PG8CWVTmxBKsOaGaHS1A1oCYKlHAThyjdglowMkv2KF86ziR8OPCJ9j0azMfu-X70g_B1CSv5xhEknDF2TJFPjOvkTCl--qrHzZCOWNkeoBnRvo5c7rTvmgO-roNlNlkTCladN1wlm6AX0r_rJ53D5zI5sk3LtGi9ny8e90eWmTcuJ82BN_IkjfJilh7x-2e63shC" />
-                        </div>
-                    </div>
-                    <h4 class="mt-8 font-headline-md text-headline-md text-primary tracking-widest">MITHRANJANA P - V A
-                    </h4>
                 </div>
             </div>
         </section>
@@ -552,21 +691,21 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="aspect-[4/3] bg-surface-container-high rounded overflow-hidden shadow-md">
                         <img alt="Gallery 1" class="w-full h-full object-cover"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHGUoUiR5HIBJRLGVOXFDMgI-1v5vKXuE8jB2zZYcvti-o-3qJ11eH68tEf4BV-V6Ey9myIcxLo8UVjquYnRgkyCblfnfpg4LZUgKyiH1o-XIiScQoS3fJHgc0dt6B5lR23MGyeV3Pj0M_z1HS2MXsQJUuT0KFZ5Wym6P40fH-OaSKKBNj5t1f3hljtXu4zWqNDxmIJONQQKCiIDzC9ruHsr65B11ogB0mXHadFipa5v1M_ie3po8y5Czz9HgqYaotoq59QJgXWyGB" />
+                            src="assets/gallery01.jpg" />
                     </div>
                     <div class="aspect-[4/3] bg-surface-container-high rounded overflow-hidden shadow-md">
                         <img alt="Gallery 2" class="w-full h-full object-cover"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXbW2FIvYTLuM5qYxWqNaSPxrA5lVDTzTMfB5hhCZZ3u_qUXX-kv3mJYkEJ5HG4GN5yJ1IHFw7xdR_vCNfxKaA--fsFPH28DVroTtriYg4wmTftl2uHR9k1VB9YRNcGqfgAnpPCiNjs3aEakzLPRHdF6TRbTLdGpZNfF_JmegA-ISP6U6SSxOvdjSl3FXGi0EzGlrHcu0k3RmNCHfR-KpCDuLQNgtoJZSyGdCxBXKn0sgHV3D7tHBsMGbZ3QpGpkET5zihyFndlMad" />
+                            src="assets/gallery02.jpg" />
                     </div>
                     <div class="aspect-[4/3] bg-surface-container-high rounded overflow-hidden shadow-md">
                         <img alt="Gallery 3" class="w-full h-full object-cover"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHib7_t5vCJgy8nR0zyts7wX8o90AqL2IR90PgpxkTCpIxfh8MBXfcvx4aCbHGQ2Um-Dmcg89cMV7Y7uQN-StZ2Ex1KA15qgQg0zhUpnLepmF2iJbE6mHMUWO5VN1j6uGnQxs0fsUAVbT9YRflsu1c38eO1ZnY8-scFZXwoPHeg5j33JM4q_0n7fstqjx1nfrQd1P7SpRleQHNlTeX2XA9ujOZEkC_-yCNpJg4EVkT04pkUbREe0seMVLlRD8rKZ6m5E_paw8FuB8Q" />
+                            src="assets/gallery03.jpg" />
                     </div>
                 </div>
                 <div class="flex justify-center">
                     <button
                         class="px-6 py-2 bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md rounded-full flex items-center gap-2 hover:bg-secondary-container transition-all">View
-                        More <span class="material-symbols-outlined text-[18px]">arrow_circle_right</span></button>
+                        More <i class="bi bi-arrow-right text-[18px]"></i></button>
                 </div>
             </div>
         </section>
@@ -604,11 +743,11 @@
                 <div class="space-y-6 font-body-md text-on-primary/70">
                     <p>St. Joseph's Matriculation Higher Secondary School, Pension Line, Gugai Salem – 636 006</p>
                     <div class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-secondary-fixed">call</span>
+                        <i class="bi bi-telephone text-secondary-fixed"></i>
                         <span>0427-2465336</span>
                     </div>
                     <div class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-secondary-fixed">mail</span>
+                        <i class="bi bi-envelope text-secondary-fixed"></i>
                         <span>stjosephss@gmail.com</span>
                     </div>
                 </div>
@@ -617,14 +756,14 @@
             <div class="md:col-span-1">
                 <h4 class="font-headline-md text-headline-md mb-8 text-secondary-fixed">Follow Us</h4>
                 <div class="flex gap-6">
-                    <a class="hover:text-secondary-fixed transition-transform hover:scale-110" href="#"><span
-                            class="material-symbols-outlined">facebook</span></a>
-                    <a class="hover:text-secondary-fixed transition-transform hover:scale-110" href="#"><span
-                            class="material-symbols-outlined">photo_camera</span></a>
-                    <a class="hover:text-secondary-fixed transition-transform hover:scale-110" href="#"><span
-                            class="material-symbols-outlined">smart_display</span></a>
-                    <a class="hover:text-secondary-fixed transition-transform hover:scale-110" href="#"><span
-                            class="material-symbols-outlined">link</span></a>
+                    <a class="hover:text-secondary-fixed transition-transform hover:scale-110" href="#"><i
+                            class="bi bi-facebook"></i></a>
+                    <a class="hover:text-secondary-fixed transition-transform hover:scale-110" href="#"><i
+                            class="bi bi-camera"></i></a>
+                    <a class="hover:text-secondary-fixed transition-transform hover:scale-110" href="#"><i
+                            class="bi bi-youtube"></i></a>
+                    <a class="hover:text-secondary-fixed transition-transform hover:scale-110" href="#"><i
+                            class="bi bi-link"></i></a>
                 </div>
             </div>
         </div>
@@ -649,6 +788,145 @@
                 }
             });
         });
+
+        // Carousel functionality
+        let currentSlide = 0;
+        const carouselImages = document.querySelectorAll('.carousel-image');
+        const totalSlides = carouselImages.length;
+
+        function showSlide(index) {
+            carouselImages.forEach(img => img.classList.add('hidden'));
+            carouselImages[index].classList.remove('hidden');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        const carouselNext = document.getElementById('carousel-next');
+        const carouselPrev = document.getElementById('carousel-prev');
+
+        if (carouselNext) {
+            carouselNext.addEventListener('click', nextSlide);
+        }
+        if (carouselPrev) {
+            carouselPrev.addEventListener('click', prevSlide);
+        }
+
+        // Auto-advance carousel every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // YouTube Channel Integration
+        const CHANNEL_ID = 'UCs6owzVuqK9s7gKbNC5HrZw';
+        const YOUTUBE_API_URL = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
+        
+        // Fetch YouTube videos using CORS proxy
+        async function fetchYouTubeVideos() {
+            try {
+                // Using a CORS proxy to fetch YouTube RSS feed
+                const corsProxy = 'https://api.allorigins.win/raw?url=';
+                const response = await fetch(corsProxy + encodeURIComponent(YOUTUBE_API_URL));
+                const xmlText = await response.text();
+                
+                // Parse XML
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+                const entries = xmlDoc.querySelectorAll('entry');
+                
+                const videos = [];
+                entries.forEach((entry, index) => {
+                    if (index < 4) { // Get first 4 videos
+                        const title = entry.querySelector('title')?.textContent || 'Untitled';
+                        const link = entry.querySelector('link')?.getAttribute('href') || '#';
+                        const published = entry.querySelector('published')?.textContent || '';
+                        const videoId = link.split('v=')[1] || link.split('watch?')[1];
+                        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+                        
+                        videos.push({
+                            id: videoId,
+                            title: title,
+                            link: link,
+                            published: new Date(published).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+                            thumbnail: thumbnailUrl
+                        });
+                    }
+                });
+                
+                displayYouTubeVideos(videos);
+                return videos;
+            } catch (error) {
+                console.error('Error fetching YouTube videos:', error);
+                displayYouTubeVideosError();
+            }
+        }
+
+        function displayYouTubeVideos(videos) {
+            if (videos.length === 0) return;
+            
+            // Display featured video (latest)
+            const featured = videos[0];
+            document.getElementById('featured-video').innerHTML = `
+                <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/${featured.id}?autoplay=0&rel=0&modestbranding=1" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            `;
+            document.getElementById('featured-title').textContent = featured.title;
+            document.getElementById('featured-date').textContent = featured.published;
+            document.getElementById('featured-link').href = featured.link;
+            
+            // Display recent videos (next 3)
+            const recentContainer = document.getElementById('recent-videos');
+            recentContainer.innerHTML = '';
+            
+            for (let i = 1; i <= 3 && i < videos.length; i++) {
+                const video = videos[i];
+                const videoCard = document.createElement('a');
+                videoCard.href = video.link;
+                videoCard.target = '_blank';
+                videoCard.className = 'block bg-white/10 rounded-lg overflow-hidden cursor-pointer hover:bg-white/20 transition-all group';
+                videoCard.innerHTML = `
+                    <div class="aspect-video bg-black/50 relative overflow-hidden">
+                        <img src="${video.thumbnail}" alt="${video.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-all">
+                            <i class="bi bi-play-circle text-white text-3xl opacity-70 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <h4 class="text-xs font-label-md text-white line-clamp-2 mb-1">${video.title}</h4>
+                        <p class="text-[10px] text-white/60">${video.published}</p>
+                    </div>
+                `;
+                recentContainer.appendChild(videoCard);
+            }
+        }
+
+        function displayYouTubeVideosError() {
+            document.getElementById('featured-video').innerHTML = `
+                <div class="text-center text-white/60 p-8">
+                    <i class="bi bi-exclamation-circle text-3xl mb-4"></i>
+                    <p>Unable to load videos. Please visit our <a href="https://www.youtube.com/channel/${CHANNEL_ID}" target="_blank" class="text-secondary-fixed hover:underline">YouTube channel</a></p>
+                </div>
+            `;
+            document.getElementById('featured-title').textContent = 'YouTube Channel';
+            document.getElementById('featured-link').href = `https://www.youtube.com/channel/${CHANNEL_ID}`;
+        }
+
+        // Fetch YouTube videos on page load
+        window.addEventListener('load', fetchYouTubeVideos);
+        
+        // Refresh videos every 30 minutes
+        setInterval(fetchYouTubeVideos, 30 * 60 * 1000);
     </script>
 </body>
 
